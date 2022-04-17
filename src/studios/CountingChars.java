@@ -6,7 +6,7 @@ import java.util.Map;
 public class CountingChars {
     public static void main(String[] args) {
         HashMap<Character, Integer> charCounting = new HashMap<>();
-        String sent = "Counting the characters in this.";
+        String sent = "Counting the characters in this.###$$#%#%#%";
         String[] stringArray = sent.split("\\W+");
         String resultNonAlph = new String();
         for(int i = 0; i < stringArray.length;i++){
