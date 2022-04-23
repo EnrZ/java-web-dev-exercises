@@ -1,5 +1,7 @@
 package school;
 
+import java.util.Objects;
+
 public class Student {
     private static int nextStudentId = 1;
     private String name;
@@ -28,36 +30,84 @@ public class Student {
     }
 
     /* getters and setters omitted - IntelliJ fills in getter method when starting to type*/
-    public String getName(){
+    public String getName() {
         return name;
     }
-    public void setName(String aName){
+
+    public void setName(String aName) {
         name = aName;
     }
 
     //3 more sets of getter/setter
 
-    public int getStudentId(){
+    public int getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(int aStudentId){
+    public void setStudentId(int aStudentId) {
         studentId = aStudentId;
     }
 
-    public int getNumberOfCredits(){
+    public int getNumberOfCredits() {
         return numberOfCredits;
     }
 
-    public void setNumberOfCredits(int aNumberOfCredits){
+    public void setNumberOfCredits(int aNumberOfCredits) {
         numberOfCredits = aNumberOfCredits;
     }
 
-    public double getGpa(){
+    public double getGpa() {
         return gpa;
     }
 
-    public void setGpa(double aGpa){
+    public void setGpa(double aGpa) {
         gpa = aGpa;
+    }
+
+    public String getGradeLevel() {
+        if (this.getNumberOfCredits() >= 0 && this.getNumberOfCredits() < 30) {
+            return "Freshman";
+        } else if (this.getNumberOfCredits() >= 30 && this.getNumberOfCredits() < 60) {
+            return "Sophomore";
+        } else if (this.getNumberOfCredits() >= 60 && this.getNumberOfCredits() < 90) {
+            return "Junior";
+        } else if (this.getNumberOfCredits() > 90) {
+            return "Senior";
+        } else
+            return "No Major";
+
+    }
+    public void addGrade(int courseCredits, double grade){
+        double qualityScore, totalQualityScore, newGpa;
+
+        totalQualityScore = this.getGpa() * this.numberOfCredits;
+        this.setNumberOfCredits(this.numberOfCredits + courseCredits);
+        qualityScore = grade * courseCredits;
+        totalQualityScore +=qualityScore;
+        newGpa = totalQualityScore / this.getNumberOfCredits();
+        setGpa(newGpa);
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", studentId=" + studentId +
+                ", numberOfCredits=" + numberOfCredits +
+                ", gpa=" + gpa +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return studentId == student.studentId && numberOfCredits == student.numberOfCredits && Double.compare(student.gpa, gpa) == 0 && Objects.equals(name, student.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, studentId, numberOfCredits, gpa);
     }
 }
