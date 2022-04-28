@@ -9,10 +9,16 @@ public class HouseCat extends Cat {
         name = aName;
     }
 
+    public HouseCat(String aName) {
+        name = aName;
+    }
+
     public boolean isSatisfied() {
         return !isHungry() && !isTired();
     }
 
+
+    //7.3 When overriding a method from a base class, the method signatures must be exactly the same
     @Override
     public String noise() {
         return "Hello, my name is " + name + "!";

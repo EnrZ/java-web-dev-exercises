@@ -1,6 +1,6 @@
 package org.launchcode.java.demos.lsn6inheritance;
 
-public class Cat {
+public abstract class Cat {
 
     private boolean tired = false;
     private boolean hungry = false;
@@ -9,6 +9,10 @@ public class Cat {
     // The biological family for all cat species
     private String family = "Felidae";
 
+    //no-arg constructor
+    public Cat () {
+        weight = 13;
+    }
     public Cat (double aWeight) {
         weight = aWeight;
     }
@@ -62,7 +66,6 @@ public class Cat {
         hungry = false;
     }
 
-    public String noise () {
-        return "Meeeeeeooooowww!";
-    }
+    //Now, classes which extend Cat, must provide their own version of noise(), with the exact same method signature.
+    public abstract String noise();
 }
